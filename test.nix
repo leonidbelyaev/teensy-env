@@ -16,8 +16,8 @@ pkgs.stdenv.mkDerivation rec {
     export OBJCOPY=arm-none-eabi-objcopy
     export SIZE=arm-none-eabi-size
 
+    cp ${teensy-core}/include/Makefile.default Makefile
     export TEENSY_PATH=${teensy-core}
-
     make
   '';
 

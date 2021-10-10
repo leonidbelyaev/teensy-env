@@ -10,8 +10,17 @@
     pkgs = import nixpkgs { inherit system; };
 
     teensy-core  = import ./core.nix { inherit pkgs; };
-    teensy-test  = import ./test.nix { inherit pkgs teensy-core; };
-    teensy-ulisp = import ./ulisp.nix { inherit pkgs teensy-core; };
+
+    image = import ./build.nix { inherit pkgs teensy-core; };
+
+    teensy-test  = image.build "teensy-test" ./test;
+
+    teensy-ulisp = let
+      ulisp-source = import ./ulisp.nix { inherit pkgs; };
+    in image.build
+      "teensy-ulisp"
+      (pkgs.linkFarmFromDrvs "ulisp" [ ulisp-source ]);
+
   in {
     packages.${system} = {
       inherit teensy-core teensy-test teensy-ulisp;

@@ -9,11 +9,12 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
 
-    teensy-core = import ./core.nix { inherit pkgs; };
-    teensy-test = import ./test.nix { inherit pkgs teensy-core; };
+    teensy-core  = import ./core.nix { inherit pkgs; };
+    teensy-test  = import ./test.nix { inherit pkgs teensy-core; };
+    teensy-ulisp = import ./ulisp.nix { inherit pkgs teensy-core; };
   in {
     packages.${system} = {
-      inherit teensy-core teensy-test;
+      inherit teensy-core teensy-test teensy-ulisp;
     };
   };
 }

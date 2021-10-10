@@ -23,6 +23,10 @@ pkgs.stdenvNoCC.mkDerivation rec {
     pushd teensy4
     rm main.cpp
     cp ${./Makefile.lib} Makefile
+    substitute ${./flags.mk} flags.mk \
+               --subst-var-by TEENSY_INCLUDE . \
+               --subst-var-by TEENSY_LIB .
+    cp ${./flags.mk} flags.mk
     make
     ar rvs libteensy-core.a *.o
     popd
@@ -36,7 +40,10 @@ pkgs.stdenvNoCC.mkDerivation rec {
     cp -r debug $out/include/
     cp -r util $out/include/
     cp libteensy-core.a $out/lib/
-    cp imxrt1062.ld $out/lib/
+    substitute ${./flags.mk} $out/include/flags.mk \
+               --subst-var-by TEENSY_INCLUDE $out/include \
+               --subst-var-by TEENSY_LIB $out/lib
+    cp imxrt1062.ld $out/include/IMXRT1062.ld
     popd
   '';
 }

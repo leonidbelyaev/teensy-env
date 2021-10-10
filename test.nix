@@ -16,7 +16,7 @@ pkgs.stdenv.mkDerivation rec {
     export OBJCOPY=arm-none-eabi-objcopy
     export SIZE=arm-none-eabi-size
 
-    export LDFLAGS="-T${teensy-core}/lib/imxrt1062.ld -L${teensy-core}/lib"
+    export TEENSY_PATH=${teensy-core}
 
     make
   '';

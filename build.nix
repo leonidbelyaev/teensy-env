@@ -27,4 +27,15 @@
       cp *.hex $out/
     '';
   };
+
+  flash = let
+    loader = name: path: pkgs.writeScript name ''
+      #!/bin/sh
+      ${pkgs.teensy-loader-cli}/bin/teensy-loader-cli --mcu=TEENSY40 -w ${path}
+    '';
+
+  in drv: file: {
+    type = "app";
+    program = ''${loader file "${drv}/${file}.hex"}'';
+  };
 }

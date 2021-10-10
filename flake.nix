@@ -25,5 +25,11 @@
     packages.${system} = {
       inherit teensy-core teensy-test teensy-ulisp;
     };
+
+    apps.${system} = {
+      flash-blink   = image.flash teensy-test  "blink";
+      flash-counter = image.flash teensy-test  "counter";
+      flash-ulisp   = image.flash teensy-ulisp "ulisp-arm";
+    };
   };
 }

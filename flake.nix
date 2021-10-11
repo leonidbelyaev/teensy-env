@@ -37,5 +37,9 @@
       flash-counter = image.flash teensy-test  "counter";
       flash-ulisp   = image.flash teensy-ulisp "ulisp-arm";
     };
+
+    custom = {
+      inherit image imageWith teensy-extras;
+    };
   };
 }

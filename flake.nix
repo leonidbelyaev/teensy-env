@@ -9,15 +9,21 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
 
-    teensy-core  = import ./core.nix { inherit pkgs; };
+    teensy-core   = import ./core.nix { inherit pkgs; };
+    teensy-extras = import ./extra.nix { inherit pkgs; };
 
     image = import ./build.nix { inherit pkgs teensy-core; };
 
-    teensy-test  = image.build "teensy-test" ./test;
+    teensy-test = image.build "teensy-test" ./test;
+
+    imageWith = libs: let
+      teensy-core = import ./core.nix { inherit pkgs libs; };
+    in (import ./build.nix { inherit pkgs teensy-core; });
 
     teensy-ulisp = let
       ulisp-source = import ./ulisp.nix { inherit pkgs; };
-    in image.build
+      ulisp-deps   = with teensy-extras; [ spi wire ];
+    in (imageWith ulisp-deps).build
       "teensy-ulisp"
       (pkgs.linkFarmFromDrvs "ulisp" [ ulisp-source ]);
 

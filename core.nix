@@ -34,7 +34,6 @@ pkgs.stdenvNoCC.mkDerivation rec {
     ${copyLibs libs}
 
     make
-    ar rvs libteensy-core.a *.o
 
     popd
   '';

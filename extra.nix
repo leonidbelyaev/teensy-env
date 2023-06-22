@@ -26,6 +26,6 @@
     owner = "adafruit";
     repo = "Adafruit_LSM6DS";
     rev = "f6ec7a1af1ba93beff41dfe0acf9f61d556e2d09";
-    sha256 = "sha256-3uLTqrw5B5oGbabGmxclAz8qSYdGBM2d1I0akaTYDm0=";
+    sha256 = "3uLTqrw5B5oGbabGmxclAz8qSYdGBM2d1I0akaTYDm0=";
   };
 }

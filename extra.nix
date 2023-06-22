@@ -21,4 +21,11 @@
     rev = "0cf9712f15e1ab175f0ec06496bad1c23453fb64";
     sha256 = "k6QIWXJmPbLzd9gDmnrwWSA7kcUu7OcWfOwILVAYAbQ=";
   };
+
+  lsm6ds = pkgs.fetchFromGithub {
+    owner = "adafruit";
+    repo = "Adafruit_LSM6DS";
+    rev = "f6ec7a1af1ba93beff41dfe0acf9f61d556e2d09";
+    sha256 = "k6QIWXJmPbLzd9gDmnrwWSA7kcUu7OcWfOwILVAYAbQ=";
+  };
 }
